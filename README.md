@@ -1,44 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## 前言
+搭一个适合自己风格的 react-antd-ts 模版 关键词 create-react-app antd react typescript less-modules
+admin antd-design
 
-### `yarn start`
+## 功能
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+- 登录 
+  
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- 全局功能
+  
 
-### `yarn test`
+- 编辑器
+  
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Excel
+ 
 
-### `yarn build`
+- 表格
+  
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 错误页面
+  - 401
+  - 404
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- 組件
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `yarn eject`
+## 开发
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+# 克隆项目
+git clone 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 进入项目目录
+cd antd-ts-template
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# 安装依赖
+npm install
+yarn
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# 建议不要直接使用 cnpm 安装依赖，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
+npm install --registry=https://registry.npm.taobao.org
 
-## Learn More
+# 启动服务
+npm run start
+yarn run start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+浏览器访问 http://localhost:3000
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+## 发布
+
+```bash
+# 构建测试环境
+npm run test
+
+# 构建生产环境
+npm run build
+```
+
+## 环境变量
+```
+ .env.development
+ .env.production
+ .env.test
+```
+## 其它
+
+```bash
+
+# 代码格式检查
+npm run lint
+
+# 代码格式检查并自动修复
+npm run format
+```

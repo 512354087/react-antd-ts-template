@@ -1,0 +1,95 @@
+import React, { FC } from 'react'
+import { Form, Input, Button, Checkbox, Layout } from 'antd'
+import { Helmet } from 'react-helmet'
+import { getPageTitle, layoutRouteList } from '../../../router'
+import { connect } from 'react-redux'
+import { User } from '@/store/app/types'
+import { ConnectState } from '@/store/connect'
+import './login.less'
+import styles from './login.module.less'
+
+import logo from '@/assets/login/logo.svg'
+import config from '@/config'
+
+console.log(styles)
+export interface LoginFormVM {
+  username: string
+  password: string
+  remember?: boolean
+}
+const layout = {
+  labelCol: { span: 0 },
+  wrapperCol: { span: 24 }
+}
+const tailLayout = {
+  wrapperCol: { offset: 0, span: 24 }
+}
+
+export interface LoginProps {
+  user: User
+}
+
+const Login = (loginProps: LoginProps) => {
+  const title = getPageTitle(layoutRouteList)
+  const onFinish = (values: any) => {
+    console.log('Success:', values)
+  }
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo)
+  }
+
+  return (
+    <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={title} />
+      </Helmet>
+      <div className={`${styles.container} login`}>
+        <div className={styles.content}>
+          <div className={styles.top}>
+            <div className={styles.header}>
+              <img alt="logo" className={styles.logo} src={logo} />
+              <span className={styles.title}>Ant Design</span>
+            </div>
+            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+          </div>
+          <div className={styles.main}>
+            <div className={styles.login}>
+              <Form
+                {...layout}
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+              >
+                <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+                  <Input />
+                </Form.Item>
+
+                <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+                  <Input.Password />
+                </Form.Item>
+
+                <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+
+                <Form.Item {...tailLayout}>
+                  <Button size="large" className="submit" type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
+        </div>
+        <Layout.Footer style={{ textAlign: 'center' }}>{config.FOOTER_TEXT}</Layout.Footer>
+      </div>
+    </>
+  )
+}
+
+export default connect(({ user }: ConnectState) => ({
+  user
+}))(Login)
