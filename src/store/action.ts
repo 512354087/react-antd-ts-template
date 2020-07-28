@@ -1,5 +1,7 @@
-import * as userActions from './app/action'
+import * as userActions from './user/action'
+import * as appActions from './app/action'
 
 export default {
-  ...userActions
+  ...userActions,
+  ...appActions
 }

@@ -7,11 +7,14 @@ admin antd-design
 ## 功能
 
 ```
-- 登录 
-  
+
+- 登录
+
 
 - 全局功能
-  
+    动态可配置的router 自动生成侧边菜单
+    mate 标签title 实时更新
+    尝试使用 hooks connect class 多种风格的react编程
 
 - 编辑器
   

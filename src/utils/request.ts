@@ -6,9 +6,9 @@ import axios from 'axios'
 
 //创建axios实例
 const service = axios.create({
-  baseURL: '/', // api的base_url
-  timeout: 200000, // 请求超时时间
-  withCredentials: true // 选项表明了是否是跨域请求
+  baseURL: process.env['REACT_APP_BASE_URL'] + '/', // api的base_url
+  timeout: 200000 // 请求超时时间
+  // withCredentials: true // 选项表明了是否是跨域请求
 })
 service.interceptors.request.use(
   (config) => {
@@ -50,15 +50,17 @@ service.interceptors.response.use(
 service.interceptors.response.use(
   (response) => {
     const res = response.data
-    if (res.code !== 1) {
-      res.code = res.data.code
-      res.message = res.response.data.msg
+
+    if (res.status !== 200) {
+      res.status = res.data.status
+      res.message = res.data.msg
       return Promise.reject('error')
     } else {
       return response.data
     }
   },
   (error) => {
+    console.log(error)
     const { status } = error.response
     switch (status) {
       case 401:

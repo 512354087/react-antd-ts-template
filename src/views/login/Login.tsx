@@ -1,17 +1,23 @@
 import React, { FC } from 'react'
 import { Form, Input, Button, Checkbox, Layout } from 'antd'
 import { Helmet } from 'react-helmet'
-import { getPageTitle, layoutRouteList } from '../../../router'
+import { getPageTitle, getLayoutRouteList } from '../../router'
 import { connect } from 'react-redux'
-import { User } from '@/store/app/types'
+import { User } from '@/store/user/types'
 import { ConnectState } from '@/store/connect'
 import './login.less'
 import styles from './login.module.less'
+import actions from '@/store/action'
 
 import logo from '@/assets/login/logo.svg'
 import config from '@/config'
 
-console.log(styles)
+import { login } from '@/api/user'
+import { Dispatch } from 'redux'
+import { getToken, setToken, setUser as setUserCookie } from '@/utils/cookie'
+import { Redirect } from 'react-router-dom'
+import routes from '@/router/config'
+
 export interface LoginFormVM {
   username: string
   password: string
@@ -27,18 +33,28 @@ const tailLayout = {
 
 export interface LoginProps {
   user: User
+  setUser: any
 }
 
 const Login = (loginProps: LoginProps) => {
-  const title = getPageTitle(layoutRouteList)
-  const onFinish = (values: any) => {
-    console.log('Success:', values)
+  // console.log(loginProps)
+  const { setUser, user } = loginProps
+
+  const title = getPageTitle(getLayoutRouteList(routes))
+  const onFinish: any = (values: LoginFormVM) => {
+    login(values).then((res) => {
+      setUser(res.data)
+      setToken(res.data.token)
+      setUserCookie(res.data)
+    })
   }
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
   }
-
+  if (user.token || getToken()) {
+    return <Redirect to="/" />
+  }
   return (
     <>
       <Helmet>
@@ -90,6 +106,13 @@ const Login = (loginProps: LoginProps) => {
   )
 }
 
-export default connect(({ user }: ConnectState) => ({
-  user
-}))(Login)
+export default connect(
+  ({ user }: ConnectState) => ({
+    user
+  }),
+  (dispatch, ownProps) => {
+    return {
+      setUser: (user: any) => dispatch(actions.SetUser(user))
+    }
+  }
+)(Login)

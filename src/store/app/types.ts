@@ -1,13 +1,10 @@
-export const SET_USERINFO = 'SEND_MESSAGE'
+export const SET_CALLAPSW_MENU = 'SET_CALLAPSW_MENU'
 
-export interface User {
-  usernmae: string
-  token: string
+export interface App {
+  collapseMenu: boolean
 }
 
-interface SetUserAction {
-  type: typeof SET_USERINFO
-  payload: User
+export interface SetCollapseMenu {
+  type: typeof SET_CALLAPSW_MENU
+  payload: boolean
 }
-
-export type UserActionTypes = SetUserAction

@@ -1,4 +1,4 @@
-import routes, { IRoute } from './config'
+import { IRoute } from './config'
 
 /**
  * 将路由转换为一维数组
@@ -34,19 +34,16 @@ export const getPageTitle = (routeList: IRoute[]) => {
 /**
  * 返回公共布局相关的路由
  */
-function getLayoutRouteList(): IRoute[] {
+export function getLayoutRouteList(routes: IRoute[]): IRoute[] {
   return flattenRoute(routes, false, false)
 }
 
 /**
  * 返回业务布局相关的路由 这里是全部的路由
  */
-function getBusinessRouteList(): IRoute[] {
-  return flattenRoute(routes, false, false)
+export function getBusinessRouteList(routes: IRoute[]): IRoute[] {
+  return flattenRoute(routes, true, false)
 }
-
-export const layoutRouteList = getLayoutRouteList()
-export const businessRouteList = getBusinessRouteList()
 
 /**
  *
@@ -61,11 +58,4 @@ export function getPagePathList(pathname?: string): string[] {
 
 function findRoutesByPaths(pathList: string[], routeList: IRoute[], basename?: string): IRoute[] {
   return routeList.filter((child: IRoute) => pathList.indexOf((basename || '') + child.path) !== -1)
-}
-
-/**
- * 只有业务路由会有面包屑
- */
-export function getBreadcrumbs(): IRoute[] {
-  return findRoutesByPaths(getPagePathList(), businessRouteList, '')
 }

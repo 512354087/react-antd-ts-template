@@ -1,9 +1,9 @@
-import { User, SET_USERINFO, UserActionTypes } from './types'
+import { App, SET_CALLAPSW_MENU, SetCollapseMenu } from './types'
 
 // TypeScript infers that this function is returning SendMessageAction
-export function SetUser(user: User): UserActionTypes {
+export function setCollapseMenu(collapseMenu: boolean): SetCollapseMenu {
   return {
-    type: SET_USERINFO,
-    payload: user
+    type: SET_CALLAPSW_MENU,
+    payload: collapseMenu
   }
 }
