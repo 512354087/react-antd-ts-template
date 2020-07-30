@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Layout } from 'antd'
 import { Helmet } from 'react-helmet'
 import { getPageTitle, getLayoutRouteList } from '../../router'
 import { connect } from 'react-redux'
-import { User } from '@/store/user/types'
+import { User, UserActionTypes } from '@/store/user/types'
 import { ConnectState } from '@/store/connect'
 import './login.less'
 import styles from './login.module.less'
@@ -13,10 +13,11 @@ import logo from '@/assets/login/logo.svg'
 import config from '@/config'
 
 import { login } from '@/api/user'
-import { Dispatch } from 'redux'
 import { getToken, setToken, setUser as setUserCookie } from '@/utils/cookie'
 import { Redirect } from 'react-router-dom'
 import routes from '@/router/config'
+import store from '@/store'
+import { mergeVoidType } from '@/utils/mapper'
 
 export interface LoginFormVM {
   username: string
@@ -31,23 +32,24 @@ const tailLayout = {
   wrapperCol: { offset: 0, span: 24 }
 }
 
+type setUserType = (user: User) => UserActionTypes
+
 export interface LoginProps {
   user: User
-  setUser: any
+  setUser: setUserType
 }
 
 const Login = (loginProps: LoginProps) => {
   // console.log(loginProps)
   const { setUser, user } = loginProps
-
   const title = getPageTitle(getLayoutRouteList(routes))
-  const onFinish: any = (values: LoginFormVM) => {
+  const onFinish = mergeVoidType((values: LoginFormVM) => {
     login(values).then((res) => {
       setUser(res.data)
       setToken(res.data.token)
       setUserCookie(res.data)
     })
-  }
+  })
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
@@ -112,7 +114,7 @@ export default connect(
   }),
   (dispatch, ownProps) => {
     return {
-      setUser: (user: any) => dispatch(actions.SetUser(user))
+      setUser: (user: User) => dispatch(actions.SetUser(user))
     }
   }
 )(Login)

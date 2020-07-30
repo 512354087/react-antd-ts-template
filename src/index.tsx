@@ -7,9 +7,8 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
 import store from './store'
 import { Provider } from 'react-redux'
-import test from '@/test'
 
-console.log(process.env, test)
+console.log(process.env)
 ReactDOM.render(
   <ConfigProvider locale={zhCN}>
     <Provider store={store}>

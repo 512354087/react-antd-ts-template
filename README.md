@@ -2,28 +2,20 @@
 
 ## 前言
 搭一个适合自己风格的 react-antd-ts 模版 关键词 create-react-app antd react typescript less-modules
-admin antd-design
+admin antd-design react-hooks
 
 ## 功能
 
 ```
 
 - 登录
-
+   yarn run serve 打开服务端mock接口数据
+   账号 密码 任意填写 
 
 - 全局功能
-    动态可配置的router 自动生成侧边菜单
+    动态可配置的router 自动生成侧边菜单 包含角色权限
     mate 标签title 实时更新
-    尝试使用 hooks connect class 多种风格的react编程
-
-- 编辑器
-  
-
-- Excel
- 
-
-- 表格
-  
+    尝试使用 hooks connect class 多种写法的react编程
 
 - 错误页面
   - 401
@@ -32,7 +24,18 @@ admin antd-design
 - 組件
 
 ```
+## 相关配置文件
+```
+- prettier
+  .prettierrc.js
 
+- typescript
+  tsconfing.json
+
+- eslint
+  .eslintrc.js
+
+```
 ## 开发
 
 ```bash
@@ -65,6 +68,9 @@ npm run test
 
 # 构建生产环境
 npm run build
+
+# 构建serve端环境
+npm run serve
 ```
 
 ## 环境变量

@@ -3,7 +3,6 @@ const server = new Koa()
 const cors = require('koa2-cors') //导入跨域模块
 const bodyParser = require('koa-bodyparser') // 参数解析
 const tool = require('../server/tool')
-
 const router = require('koa-router')()
 router.get('/', async (ctx) => {
   ctx.body = '首页'
