@@ -11,6 +11,7 @@ import styles from './BasicLayout.module.less'
 import config from '@/config'
 import { Helmet } from 'react-helmet'
 import { getPageTitle, getBusinessRouteList } from '../router/index'
+import './BasicLayout.less'
 
 const { Header, Sider, Content } = Layout
 const { SubMenu, Item: MenuItem } = Menu
