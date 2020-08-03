@@ -1,6 +1,6 @@
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Spin } from 'antd'
 import _ from 'lodash'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Link, Redirect, Switch } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import { IRoute } from '@/router/config'
@@ -12,7 +12,7 @@ import config from '@/config'
 import { Helmet } from 'react-helmet'
 import { getPageTitle, getBusinessRouteList } from '../router/index'
 import './BasicLayout.less'
-
+import Breadcrumbs from '@/components/breadcrumb/Breadcrumb'
 const { Header, Sider, Content } = Layout
 const { SubMenu, Item: MenuItem } = Menu
 
@@ -68,6 +68,11 @@ interface BasicLayoutProps extends RouterLayoutType {
 }
 
 const BasicLayout: React.FC<BasicLayoutProps> = ({ routes, history, location: { pathname }, child }) => {
+  // console.log(pathname, getBusinessRouteList(routes))
+  const route: IRoute | undefined = _.find(getBusinessRouteList(routes), {
+    path: pathname
+  })
+
   const paths = _.dropRight(pathname.split('/'), 1)
   const openKeys = paths.map((m, i) => _.take(paths, i + 1).join('/'))
   const { app } = useSelector((state: RootState) => ({
@@ -75,10 +80,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({ routes, history, location: { 
   }))
   const { collapseMenu } = app
   const title = getPageTitle(getBusinessRouteList(routes))
-
-  if (pathname === '/') {
-    return <Redirect to="/dashboard" />
-  }
 
   return (
     <>
@@ -106,8 +107,17 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({ routes, history, location: { 
         </Sider>
         <Layout>
           <Header style={{ padding: 0 }}>{React.createElement(child)}</Header>
-          <Content>
-            <Switch>{_.flattenDeep(renderRoute(routes))}</Switch>
+          {route && !route.hideBreadcrumb ? <Breadcrumbs></Breadcrumbs> : ''}
+          <Content className={'main'}>
+            <Suspense
+              fallback={
+                <div className={'loading-box'}>
+                  <Spin size="large" className="layout__loading" />
+                </div>
+              }
+            >
+              <Switch>{_.flattenDeep(renderRoute(routes))}</Switch>
+            </Suspense>
           </Content>
         </Layout>
       </Layout>

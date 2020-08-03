@@ -1,4 +1,21 @@
 @import '../../styles/global.less';
+.layout__navbar__menu{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  overflow: hidden;
+  &-item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 15px;
+    font-size: 16px;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+}
 .wrap {
   display: flex;
   align-items: center;
@@ -7,17 +24,15 @@
   padding: 0 @page-margin;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
   .btn_toggle {
     display: flex;
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s, padding 0s;
   }
-
   .user_name {
     display: inline-block;
-    width: 80px;
+    width: auto;
     margin-left: 12px;
     overflow: hidden;
     color: #616773;
@@ -25,9 +40,9 @@
     text-overflow: ellipsis;
     word-break: keep-all;
   }
-
   .pop_trigger {
     display: flex;
     align-items: center;
   }
+
 }

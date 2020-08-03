@@ -1,4 +1,5 @@
 import { IRoute } from './config'
+import config from '@/config'
 
 /**
  * 将路由转换为一维数组
@@ -58,4 +59,11 @@ export function getPagePathList(pathname?: string): string[] {
 
 function findRoutesByPaths(pathList: string[], routeList: IRoute[], basename?: string): IRoute[] {
   return routeList.filter((child: IRoute) => pathList.indexOf((basename || '') + child.path) !== -1)
+}
+
+/**
+ * 只有业务路由会有面包屑
+ */
+export function getBreadcrumbs(routes: IRoute[]): IRoute[] {
+  return findRoutesByPaths(getPagePathList(), getBusinessRouteList(routes), config.BASENAME)
 }

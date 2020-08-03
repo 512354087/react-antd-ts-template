@@ -4,10 +4,16 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import routes, { IRoute } from './router/config'
 import adminConfig from './config'
 import RouterLayout from '@/layout/RouterIndex'
+import './App.less'
 
-console.log(routes)
 const App: FC = () => (
-  <Suspense fallback={<Spin size="large" className="layout__loading" />}>
+  <Suspense
+    fallback={
+      <div className={'loading-box'}>
+        <Spin size="large" className="layout__loading" />
+      </div>
+    }
+  >
     {/* basename 如果放入的是服务器子目录则需要设置 */}
     <Router basename={adminConfig.BASENAME}>{<RouterLayout routes={routes} />}</Router>
   </Suspense>

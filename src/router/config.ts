@@ -58,9 +58,18 @@ const routes: IRoute[] = [
   },
   {
     path: '/',
+    meta: {
+      title: '首页',
+      icon: DashboardOutlined
+    },
+    exact: true,
+    redirect: '/admin/dashboard/intro'
+  },
+  {
+    path: '/admin',
     component: React.lazy(() => import('@/layout/BasicLayout')),
     child: HomeHeader,
-    redirect: '/dashboard/intro',
+    redirect: '/admin/dashboard',
     meta: {
       title: '首页',
       icon: DashboardOutlined
@@ -70,14 +79,18 @@ const routes: IRoute[] = [
     auth: false,
     routes: [
       {
-        path: '/dashboard',
+        path: '/',
+        redirect: '/admin/dashboard/intro',
         meta: {
-          title: '首页',
+          title: 'dashboard',
           icon: DashboardOutlined
         },
+        exact: true,
         routes: [
           {
-            path: '/dashboard/intro',
+            path: '/admin/dashboard/intro',
+            exact: true,
+            hideBreadcrumb: true, // 是否隐藏面包屑导航
             meta: {
               title: '系统总览'
             },
@@ -86,17 +99,28 @@ const routes: IRoute[] = [
         ]
       },
       {
-        path: '/list',
+        path: '/admin/list',
         meta: {
           title: '列表',
           icon: TableOutlined
         },
+        redirect: '/admin/list/list-list',
+        exact: true,
         routes: [
           {
-            path: '/list/list-list',
+            path: '/admin/list/list-list',
             meta: {
               title: '查询表格'
             },
+            exact: true,
+            component: React.lazy(() => import('../views/dashborad/intro'))
+          },
+          {
+            path: '/admin/list/list-lis222',
+            meta: {
+              title: '查询表111'
+            },
+            exact: true,
             component: React.lazy(() => import('../views/dashborad/intro'))
           }
         ]
