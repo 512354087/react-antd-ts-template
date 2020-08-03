@@ -124,6 +124,33 @@ const routes: IRoute[] = [
             component: React.lazy(() => import('../views/dashborad/intro'))
           }
         ]
+      },
+      {
+        path: '/admin/chart',
+        meta: {
+          title: '图表',
+          icon: TableOutlined
+        },
+        redirect: '/admin/chart/echart',
+        exact: true,
+        routes: [
+          {
+            path: '/admin/chart/echart',
+            meta: {
+              title: 'Echarts'
+            },
+            exact: true,
+            component: React.lazy(() => import('../views/chart/EchartsDemo/Echarts'))
+          },
+          {
+            path: '/admin/chart/bizCharts',
+            meta: {
+              title: 'BizCharts'
+            },
+            exact: true,
+            component: React.lazy(() => import('../views/chart/bizChartDemo/Index'))
+          }
+        ]
       }
     ]
   },
