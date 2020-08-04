@@ -1,7 +1,7 @@
 import React from 'react'
 import BasicLayout from '@/layout/BasicLayout'
 import HomeHeader from '@/components/header'
-import { DashboardOutlined, FileOutlined, FormOutlined, TableOutlined } from '@ant-design/icons'
+import { DashboardOutlined, FileOutlined, FormOutlined, TableOutlined, AreaChartOutlined } from '@ant-design/icons'
 export enum Roles {
   /** 游客 */
   Guest = 'Guest',
@@ -79,24 +79,15 @@ const routes: IRoute[] = [
     auth: false,
     routes: [
       {
-        path: '/',
-        redirect: '/admin/dashboard/intro',
+        path: '/admin/dashboard',
         meta: {
-          title: 'dashboard',
+          title: '系统总览',
           icon: DashboardOutlined
         },
+        component: React.lazy(() => import('../views/dashborad/intro')),
+        hideBreadcrumb: true, // 是否隐藏面包屑导航
         exact: true,
-        routes: [
-          {
-            path: '/admin/dashboard/intro',
-            exact: true,
-            hideBreadcrumb: true, // 是否隐藏面包屑导航
-            meta: {
-              title: '系统总览'
-            },
-            component: React.lazy(() => import('../views/dashborad/intro'))
-          }
-        ]
+        routes: []
       },
       {
         path: '/admin/list',
@@ -113,7 +104,7 @@ const routes: IRoute[] = [
               title: '查询表格'
             },
             exact: true,
-            component: React.lazy(() => import('../views/dashborad/intro'))
+            component: React.lazy(() => import('../views/list/table'))
           },
           {
             path: '/admin/list/list-lis222',
@@ -129,7 +120,7 @@ const routes: IRoute[] = [
         path: '/admin/chart',
         meta: {
           title: '图表',
-          icon: TableOutlined
+          icon: AreaChartOutlined
         },
         redirect: '/admin/chart/echart',
         exact: true,

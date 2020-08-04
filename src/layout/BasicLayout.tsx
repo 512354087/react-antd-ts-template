@@ -36,7 +36,6 @@ function renderMenu(router: IRoute[]) {
         </SubMenu>
       )
     }
-
     return (
       <MenuItem key={m.path}>
         {m.meta.icon && React.createElement(m.meta.icon)}

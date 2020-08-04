@@ -7,7 +7,9 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    render: (text: string) => <a>{text}</a>
+    render: (text: string) => {
+      return <a href={'/'}>{text}</a>
+    }
   },
   {
     title: 'Age',
@@ -87,3 +89,5 @@ const Demo = () => {
     </div>
   )
 }
+
+export default Demo
