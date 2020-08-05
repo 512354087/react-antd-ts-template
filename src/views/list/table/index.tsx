@@ -85,6 +85,8 @@ const Demo = () => {
         }}
         columns={columns}
         dataSource={data}
+        // showSizeChanger 默认>= 50 为true
+        pagination={{ pageSize: 2, total: 4, showQuickJumper: true }}
       />
     </div>
   )

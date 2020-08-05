@@ -95,24 +95,24 @@ const routes: IRoute[] = [
           title: '列表',
           icon: TableOutlined
         },
-        redirect: '/admin/list/list-list',
+        redirect: '/admin/list/table',
         exact: true,
         routes: [
           {
-            path: '/admin/list/list-list',
+            path: '/admin/list/table',
             meta: {
-              title: '查询表格'
+              title: '基础表格'
             },
             exact: true,
-            component: React.lazy(() => import('../views/list/table'))
+            component: React.lazy(() => import('../views/list/table/index'))
           },
           {
-            path: '/admin/list/list-lis222',
+            path: '/admin/list/mixin-table',
             meta: {
-              title: '查询表111'
+              title: '多功能表格'
             },
             exact: true,
-            component: React.lazy(() => import('../views/dashborad/intro'))
+            component: React.lazy(() => import('../views/list/mixinTable/index'))
           }
         ]
       },
