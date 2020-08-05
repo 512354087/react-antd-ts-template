@@ -102,7 +102,9 @@ const Login = (loginProps: LoginProps) => {
             </div>
           </div>
         </div>
-        <Layout.Footer style={{ textAlign: 'center' }}>{config.FOOTER_TEXT}</Layout.Footer>
+        <Layout.Footer style={{ textAlign: 'center' }}>
+          {config.FOOTER_TEXT} V{config.CLIENT_VERSION}
+        </Layout.Footer>
       </div>
     </>
   )
