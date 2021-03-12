@@ -166,7 +166,7 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "prettier": "^2.0.5",
-    "react-dev-utils": "^10.2.1",
+    "react-dev-utils": "^11.0.4",
     "redux-devtools-extension": "^2.13.8",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
